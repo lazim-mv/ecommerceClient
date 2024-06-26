@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { persistStore } from "redux-persist";
+import { store } from "../redux/store";
 
 const Container = styled.div`
   height: 60px;
@@ -74,6 +76,7 @@ const Navbar = () => {
 
   function handleLogOut() {
     localStorage.clear();
+    persistStore(store).purge();
   }
   return (
     <Container>
@@ -91,11 +94,13 @@ const Navbar = () => {
           </Link>
         </Center>
         <Right>
-          <Link to="/Register">
+          {/* <Link to="/Register">
             <MenuItem> REGISTER</MenuItem>
-          </Link>
+          </Link> */}
           <MenuItem>SIGN IN</MenuItem>
-          <MenuItem onClick={handleLogOut}>SIGN OUT</MenuItem>
+          <a href="/login">
+            <MenuItem onClick={handleLogOut}>SIGN OUT</MenuItem>
+          </a>
           <Link to="/cart">
             <MenuItem>
               <Badge badgeContent={quantity} color="primary">

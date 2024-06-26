@@ -15,6 +15,7 @@ const Container = styled.div`
       center;
   background-size: cover;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
@@ -80,6 +81,9 @@ const Login = () => {
   };
   return (
     <Container>
+      <h5 style={{marginBottom:"20px"}}>
+        username: admin <br /> password: admin
+      </h5>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
