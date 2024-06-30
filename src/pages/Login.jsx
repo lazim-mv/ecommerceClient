@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
+import { persistStore } from "redux-persist";
+import { store } from "../redux/store";
 
 const Container = styled.div`
   width: 100vw;
@@ -77,11 +79,15 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    persistStore(store)
+      .purge()
+      .then(() => {
+        login(dispatch, { username, password });
+      });
   };
   return (
     <Container>
-      <h5 style={{marginBottom:"20px"}}>
+      <h5 style={{ marginBottom: "20px" }}>
         username: admin <br /> password: admin
       </h5>
       <Wrapper>
